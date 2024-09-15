@@ -10,17 +10,11 @@ import (
 	"github.com/erkindilekci/cinebase/server/pkg/controller"
 	"github.com/erkindilekci/cinebase/server/pkg/repository"
 	"github.com/erkindilekci/cinebase/server/pkg/service"
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	ctx := context.Background()
 	configurationManager := app.NewConfigurationManager()
 	dbPool := postgresql.GetConnectionPool(ctx, configurationManager.PostgresqlConfig)
@@ -37,7 +31,7 @@ func main() {
 	e := echo.New()
 	e.Use(echoMiddleware.Recover())
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowOrigins:     []string{"https://erkindilekci-cinebase.netlify.app"},
 		AllowMethods:     []string{echo.GET, echo.POST, echo.PUT, echo.DELETE, echo.PATCH, echo.OPTIONS},
 		AllowHeaders:     []string{"Accept", "Content-Type", "X-CSRF-Token", "Authorization"},
 		AllowCredentials: true,
