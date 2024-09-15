@@ -34,6 +34,7 @@ const Signup = () => {
                 requestOptions
             );
             if (response.status === 201) {
+                toast({title: 'Success', description: "You have successfully created your account. Now you can login with your email and password."});
                 navigate('/login');
             } else {
                 const data = await response.json();
