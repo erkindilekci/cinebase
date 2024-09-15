@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-import { OutletContextType } from './Login';
-import { Movie } from './MovieDetails';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+import {useEffect, useState} from 'react';
+import {useNavigate, useOutletContext} from 'react-router-dom';
+import {OutletContextType} from './Login';
+import {Movie} from './MovieDetails';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '../ui/table';
 
 const ManageCatalogue = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
-    const { jwtToken } = useOutletContext<OutletContextType>();
+    const {jwtToken} = useOutletContext<OutletContextType>();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,9 +19,9 @@ const ManageCatalogue = () => {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', `Bearer ${localStorage.getItem("token")}`);
 
-        const requestOptions = { method: 'GET', headers: headers };
+        const requestOptions = {method: 'GET', headers: headers};
 
-        fetch('${process.env.BACKEND_URL}/admin/movies', requestOptions)
+        fetch('https://cinebase.erkindilekci.me/admin/movies', requestOptions)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

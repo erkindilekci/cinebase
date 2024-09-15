@@ -1,16 +1,16 @@
-import { useToast } from '@/hooks/use-toast';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
-import { z } from 'zod';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import MovieAddEditForm, { MovieFormSchema } from '../MovieAddEditForm';
-import { OutletContextType } from './Login';
+import {useToast} from '@/hooks/use-toast';
+import {useNavigate, useOutletContext, useParams} from 'react-router-dom';
+import {z} from 'zod';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import MovieAddEditForm, {MovieFormSchema} from '../MovieAddEditForm';
+import {OutletContextType} from './Login';
 import MovieFormSkeleton from "@/components/MovieFormSkeleton";
-import { fetchGenres, FormDataType } from '@/helper/addEditHelpers.ts';
-import { Genre } from "@/components/pages/Genres.tsx";
+import {fetchGenres, FormDataType} from '@/helper/addEditHelpers.ts';
+import {Genre} from "@/components/pages/Genres.tsx";
 
 const fetchMovie = async (id: string, jwtToken: string): Promise<FormDataType> => {
-    const response = await fetch(`${process.env.BACKEND_URL}/admin/movies/${id}`, {
-        headers: { Authorization: `Bearer ${jwtToken}` }
+    const response = await fetch(`https://cinebase.erkindilekci.me/admin/movies/${id}`, {
+        headers: {Authorization: `Bearer ${jwtToken}`}
     });
     if (!response.ok) {
         throw new Error('Failed to fetch movie data');
@@ -25,19 +25,19 @@ const fetchMovie = async (id: string, jwtToken: string): Promise<FormDataType> =
 };
 
 const EditMovie = () => {
-    const { jwtToken } = useOutletContext<OutletContextType>();
-    const { id } = useParams<{ id: string }>();
-    const { toast } = useToast();
+    const {jwtToken} = useOutletContext<OutletContextType>();
+    const {id} = useParams<{ id: string }>();
+    const {toast} = useToast();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { data: movieData, isLoading: isMovieLoading } = useQuery({
+    const {data: movieData, isLoading: isMovieLoading} = useQuery({
         queryKey: ['movie', id],
         queryFn: () => fetchMovie(id!, jwtToken),
         enabled: !!id && !!jwtToken
     });
 
-    const { data: genres, isLoading: isGenresLoading } = useQuery({
+    const {data: genres, isLoading: isGenresLoading} = useQuery({
         queryKey: ['genres'],
         queryFn: fetchGenres
     });
@@ -46,7 +46,7 @@ const EditMovie = () => {
         mutationFn: (data: z.infer<typeof MovieFormSchema>) => {
             data.release_date = new Date(data.release_date).toISOString().split("T")[0];
 
-            return fetch(`${process.env.BACKEND_URL}/admin/movies/${id}`, {
+            return fetch(`https://cinebase.erkindilekci.me/admin/movies/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,20 +61,20 @@ const EditMovie = () => {
             });
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['movies'] })
+            queryClient.invalidateQueries({queryKey: ['movies']})
                 .then(() => {
-                    toast({ title: 'Success', description: 'Movie updated successfully' });
+                    toast({title: 'Success', description: 'Movie updated successfully'});
                     navigate('/admin/movies');
                 });
         },
         onError: (error: Error) => {
-            toast({ title: 'Error', description: error.message });
+            toast({title: 'Error', description: error.message});
         }
     });
 
     const deleteMutation = useMutation({
         mutationFn: () => {
-            return fetch(`${process.env.BACKEND_URL}/admin/movies/${id}`, {
+            return fetch(`https://cinebase.erkindilekci.me/admin/movies/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${jwtToken}`
@@ -86,14 +86,14 @@ const EditMovie = () => {
             });
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['movies'] })
+            queryClient.invalidateQueries({queryKey: ['movies']})
                 .then(() => {
-                    toast({ title: 'Success', description: 'Movie deleted successfully' });
+                    toast({title: 'Success', description: 'Movie deleted successfully'});
                     navigate('/admin/movies');
                 });
         },
         onError: (error: Error) => {
-            toast({ title: 'Error', description: error.message });
+            toast({title: 'Error', description: error.message});
         }
     });
 

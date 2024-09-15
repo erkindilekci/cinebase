@@ -1,7 +1,7 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ArrowLeft, CalendarIcon, ClockIcon } from 'lucide-react';
-import { Button } from './ui/button';
+import {Card, CardContent, CardFooter, CardHeader} from '@/components/ui/card';
+import {Skeleton} from '@/components/ui/skeleton';
+import {ArrowLeft, CalendarIcon, ClockIcon} from 'lucide-react';
+import {Button} from './ui/button';
 
 const MovieCardSkeleton = () => {
     return (

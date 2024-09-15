@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils';
-import { LucideIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { buttonVariants } from './ui/button';
+import {cn} from '@/lib/utils';
+import {LucideIcon} from 'lucide-react';
+import {Link} from 'react-router-dom';
+import {buttonVariants} from './ui/button';
 
 interface NavProps {
     links: {
@@ -14,7 +14,7 @@ interface NavProps {
     onLinkClick: (path: string) => void;
 }
 
-const Nav = ({ links, onLinkClick }: NavProps) => {
+const Nav = ({links, onLinkClick}: NavProps) => {
     return (
         <div
             data-collapsed={false}

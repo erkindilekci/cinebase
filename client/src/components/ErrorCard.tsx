@@ -1,12 +1,12 @@
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
+import {ExclamationTriangleIcon} from '@radix-ui/react-icons';
+import {Alert, AlertDescription, AlertTitle} from './ui/alert';
 
 interface ErrorPropTypes {
     alertTitle?: string;
     alertDescription: string;
 }
 
-const ErrorCard = ({ alertTitle, alertDescription }: ErrorPropTypes) => {
+const ErrorCard = ({alertTitle, alertDescription}: ErrorPropTypes) => {
     return (
         <div className="h-full w-full flex items-center justify-center">
             <Alert

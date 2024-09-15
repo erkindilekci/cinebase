@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
     ColumnFiltersState,
     flexRender,
@@ -10,27 +10,27 @@ import {
     useReactTable,
     VisibilityState
 } from '@tanstack/react-table';
-import { ChevronDownIcon } from 'lucide-react';
+import {ChevronDownIcon} from 'lucide-react';
 import * as React from 'react';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useEffect} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import ErrorCard from '../ErrorCard';
 import Loading from '../Loading';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Input } from '../ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
-import { Movie } from './MovieDetails';
-import { movieColumns } from "@/components/pages/Movies.tsx";
-import { Icons } from "@/components/icons.tsx";
+import {Button} from '../ui/button';
+import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger} from '../ui/dropdown-menu';
+import {Input} from '../ui/input';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '../ui/table';
+import {Movie} from './MovieDetails';
+import {movieColumns} from "@/components/pages/Movies.tsx";
+import {Icons} from "@/components/icons.tsx";
 
 const fetchMovies = async (genreId: number): Promise<Movie[]> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const requestOptions: RequestInit = { method: 'GET', headers: headers };
+    const requestOptions: RequestInit = {method: 'GET', headers: headers};
 
-    const response = await fetch(`${process.env.BACKEND_URL}/movies?genre=${genreId}`, requestOptions);
+    const response = await fetch(`https://cinebase.erkindilekci.me/movies?genre=${genreId}`, requestOptions);
 
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
@@ -47,7 +47,7 @@ const fetchMovies = async (genreId: number): Promise<Movie[]> => {
 
 const OneGenreMovies = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
         if (id === null) {

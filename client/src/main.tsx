@@ -1,7 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import App from './App.tsx';
 import ErrorPage from './components/pages/ErrorPage.tsx';
 import Genres from './components/pages/Genres.tsx';
@@ -31,17 +31,17 @@ const router = createBrowserRouter([
         element: <App/>,
         errorElement: <ErrorPage/>,
         children: [
-            { index: true, element: <Home/> },
-            { path: '/movies', element: <Movies/> },
-            { path: '/movies/:id', element: <MovieDetails/> },
-            { path: '/genres', element: <Genres/> },
-            { path: '/genres/:id', element: <OneGenreMovies/> },
-            { path: '/admin/movies', element: <ManageCatalogue/> },
-            { path: '/admin/movies/0', element: <AddMovie/> },
-            { path: '/admin/movies/:id', element: <EditMovie/> },
-            { path: '/graphql', element: <Graphql/> },
-            { path: '/signup', element: <Signup/> },
-            { path: '/login', element: <Login/> }
+            {index: true, element: <Home/>},
+            {path: '/movies', element: <Movies/>},
+            {path: '/movies/:id', element: <MovieDetails/>},
+            {path: '/genres', element: <Genres/>},
+            {path: '/genres/:id', element: <OneGenreMovies/>},
+            {path: '/admin/movies', element: <ManageCatalogue/>},
+            {path: '/admin/movies/0', element: <AddMovie/>},
+            {path: '/admin/movies/:id', element: <EditMovie/>},
+            {path: '/graphql', element: <Graphql/>},
+            {path: '/signup', element: <Signup/>},
+            {path: '/login', element: <Login/>}
         ]
     }
 ]);

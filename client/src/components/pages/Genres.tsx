@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -14,10 +14,10 @@ import {
 import * as React from 'react';
 import ErrorCard from '../ErrorCard';
 import Loading from '../Loading';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
-import { useNavigate } from "react-router-dom";
+import {Button} from '../ui/button';
+import {Input} from '../ui/input';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '../ui/table';
+import {useNavigate} from "react-router-dom";
 
 export interface Genre {
     id: number;
@@ -28,9 +28,9 @@ const fetchGenres = async (): Promise<Genre[]> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const requestOptions: RequestInit = { method: 'GET', headers: headers };
+    const requestOptions: RequestInit = {method: 'GET', headers: headers};
 
-    const response = await fetch('${process.env.BACKEND_URL}/genres', requestOptions);
+    const response = await fetch('https://cinebase.erkindilekci.me/genres', requestOptions);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
@@ -41,12 +41,12 @@ export const genreColumns: ColumnDef<Genre>[] = [
     {
         accessorKey: 'genre',
         header: 'Genre',
-        cell: ({ row }) => <div>{row.getValue('genre')}</div>
+        cell: ({row}) => <div>{row.getValue('genre')}</div>
     }
 ];
 
 const Genres = () => {
-    const { data: genres, isLoading, error } = useQuery<Genre[], Error>({
+    const {data: genres, isLoading, error} = useQuery<Genre[], Error>({
         queryKey: ['genres'],
         queryFn: fetchGenres
     });

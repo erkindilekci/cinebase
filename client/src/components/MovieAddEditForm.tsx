@@ -1,29 +1,29 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useForm} from 'react-hook-form';
+import {z} from 'zod';
 
-import { Icons } from './icons';
-import { Genre } from './pages/Genres';
-import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
-import { Input } from './ui/input';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
-import { Textarea } from './ui/textarea';
+import {Icons} from './icons';
+import {Genre} from './pages/Genres';
+import {Button} from './ui/button';
+import {Checkbox} from './ui/checkbox';
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from './ui/form';
+import {Input} from './ui/input';
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from './ui/select';
+import {Textarea} from './ui/textarea';
 
 export const MovieFormSchema = z.object({
     id: z.number().optional(),
-    title: z.string().min(1, { message: 'Title is required.' }),
-    release_date: z.string().min(1, { message: 'Release date is required.' }),
+    title: z.string().min(1, {message: 'Title is required.'}),
+    release_date: z.string().min(1, {message: 'Release date is required.'}),
     runtime: z
         .number()
-        .min(1, { message: 'Runtime must be a positive number.' }),
-    mpaa_rating: z.string().min(1, { message: 'MPAA rating is required.' }),
-    description: z.string().min(1, { message: 'Description is required.' }),
+        .min(1, {message: 'Runtime must be a positive number.'}),
+    mpaa_rating: z.string().min(1, {message: 'MPAA rating is required.'}),
+    description: z.string().min(1, {message: 'Description is required.'}),
     image: z.string().optional(),
     genres: z
         .array(z.number())
-        .min(1, { message: 'Select at least one genre.' })
+        .min(1, {message: 'Select at least one genre.'})
 });
 
 export type MovieFormData = z.infer<typeof MovieFormSchema>;
@@ -37,7 +37,7 @@ interface MovieAddEditFormProps {
     onDelete?: () => void;
 }
 
-const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, onDelete }: MovieAddEditFormProps) => {
+const MovieAddEditForm = ({type, isLoading, onSubmit, defaultValues, genres, onDelete}: MovieAddEditFormProps) => {
     const form = useForm<MovieFormData>({
         resolver: zodResolver(MovieFormSchema),
         defaultValues
@@ -49,7 +49,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                 <FormField
                     control={form.control}
                     name="id"
-                    render={({ field }) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormControl>
                                 <Input
@@ -67,7 +67,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                     <FormField
                         control={form.control}
                         name="title"
-                        render={({ field }) => (
+                        render={({field}) => (
                             <FormItem>
                                 <FormLabel>Title</FormLabel>
                                 <FormControl>
@@ -86,7 +86,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                     <FormField
                         control={form.control}
                         name="release_date"
-                        render={({ field }) => (
+                        render={({field}) => (
                             <FormItem>
                                 <FormLabel>Release Date</FormLabel>
                                 <FormControl>
@@ -108,7 +108,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                     <FormField
                         control={form.control}
                         name="runtime"
-                        render={({ field }) => (
+                        render={({field}) => (
                             <FormItem>
                                 <FormLabel>Runtime (minutes)</FormLabel>
                                 <FormControl>
@@ -133,7 +133,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                     <FormField
                         control={form.control}
                         name="mpaa_rating"
-                        render={({ field }) => (
+                        render={({field}) => (
                             <FormItem>
                                 <FormLabel>MPAA Rating</FormLabel>
                                 <FormControl>
@@ -179,7 +179,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                 <FormField
                     control={form.control}
                     name="image"
-                    render={({ field }) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormLabel>Image</FormLabel>
                             <FormControl>
@@ -213,7 +213,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                                         key={genre.id}
                                         control={form.control}
                                         name="genres"
-                                        render={({ field }) => (
+                                        render={({field}) => (
                                             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                                                 <FormControl>
                                                     <Checkbox
@@ -242,7 +242,7 @@ const MovieAddEditForm = ({ type, isLoading, onSubmit, defaultValues, genres, on
                 <FormField
                     control={form.control}
                     name="description"
-                    render={({ field }) => (
+                    render={({field}) => (
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>

@@ -1,20 +1,19 @@
-import { useToast } from '@/hooks/use-toast';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-import { z } from 'zod';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import MovieAddEditForm, { MovieFormSchema } from '../MovieAddEditForm';
-import { OutletContextType } from './Login';
+import {useToast} from '@/hooks/use-toast';
+import {useNavigate, useOutletContext} from 'react-router-dom';
+import {z} from 'zod';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import MovieAddEditForm, {MovieFormSchema} from '../MovieAddEditForm';
+import {OutletContextType} from './Login';
 import MovieFormSkeleton from "@/components/MovieFormSkeleton";
-import { defaultMovieValues, fetchGenres } from '../../helper/addEditHelpers.ts';
-import * as process from "node:process";
+import {defaultMovieValues, fetchGenres} from '../../helper/addEditHelpers.ts';
 
 const AddMovie = () => {
-    const { jwtToken } = useOutletContext<OutletContextType>();
-    const { toast } = useToast();
+    const {jwtToken} = useOutletContext<OutletContextType>();
+    const {toast} = useToast();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { data: genres, isLoading: isGenresLoading } = useQuery({
+    const {data: genres, isLoading: isGenresLoading} = useQuery({
         queryKey: ['genres'],
         queryFn: fetchGenres
     });
@@ -23,7 +22,7 @@ const AddMovie = () => {
         mutationFn: (data: z.infer<typeof MovieFormSchema>) => {
             data.release_date = new Date(data.release_date).toISOString().split("T")[0];
 
-            return fetch(`${process.env.BACKEND_URL}/admin/movies`, {
+            return fetch(`https://cinebase.erkindilekci.me/admin/movies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +37,7 @@ const AddMovie = () => {
             });
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['movies'] });
+            queryClient.invalidateQueries({queryKey: ['movies']});
             toast({
                 title: 'Success',
                 description: 'Movie added successfully'
@@ -46,7 +45,7 @@ const AddMovie = () => {
             navigate('/admin/movies');
         },
         onError: (error: Error) => {
-            toast({ title: 'Error', description: error.message });
+            toast({title: 'Error', description: error.message});
         }
     });
 

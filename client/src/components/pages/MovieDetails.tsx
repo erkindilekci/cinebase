@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import {useQuery} from '@tanstack/react-query';
+import {useParams} from 'react-router-dom';
 import ErrorCard from '../ErrorCard';
 import MovieCard from '../MovieCard';
 import MovieCardSkeleton from '../MovieCardSkeleton';
-import { Genre } from './Genres';
+import {Genre} from './Genres';
 
 export interface Movie {
     id: number;
@@ -20,9 +20,9 @@ const fetchMovie = async (id: string): Promise<Movie> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const requestOptions: RequestInit = { method: 'GET', headers: headers };
+    const requestOptions: RequestInit = {method: 'GET', headers: headers};
 
-    const response = await fetch(`${process.env.BACKEND_URL}/movies/${id}`, requestOptions);
+    const response = await fetch(`https://cinebase.erkindilekci.me/movies/${id}`, requestOptions);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
@@ -30,7 +30,7 @@ const fetchMovie = async (id: string): Promise<Movie> => {
 };
 
 const MovieDetails = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const {
         data: movie,
         error,

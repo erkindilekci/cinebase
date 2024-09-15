@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Link, Outlet, useNavigate} from 'react-router-dom';
 import Nav from './components/Nav';
-import { Button } from './components/ui/button';
-import { Toaster } from './components/ui/toaster';
+import {Button} from './components/ui/button';
+import {Toaster} from './components/ui/toaster';
 
 interface LinkType {
     title: string;
@@ -86,7 +86,7 @@ function App() {
             <div className="flex flex-row">
                 <Nav links={links} onLinkClick={handleLinkClick}/>
                 <div className="flex-1 pl-8">
-                    <Outlet context={{ jwtToken, setJwtToken }}/>
+                    <Outlet context={{jwtToken, setJwtToken}}/>
                     <Toaster/>
                 </div>
             </div>

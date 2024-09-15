@@ -1,6 +1,6 @@
-import { useToast } from '@/hooks/use-toast';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import {useToast} from '@/hooks/use-toast';
+import {useEffect, useState} from 'react';
+import {Link, useNavigate, useOutletContext} from 'react-router-dom';
 import UserAuthForm from '../UserAuthForm';
 
 interface FormDataType {
@@ -17,14 +17,14 @@ type FetchDataType = { error_message: string } | { token: string };
 
 const Login = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { setJwtToken } = useOutletContext<OutletContextType>();
-    const { toast } = useToast();
+    const {setJwtToken} = useOutletContext<OutletContextType>();
+    const {toast} = useToast();
     const navigate = useNavigate();
 
-    async function handleSubmit({ email, password }: FormDataType) {
+    async function handleSubmit({email, password}: FormDataType) {
         setIsLoading(true);
 
-        const payload = { email, password };
+        const payload = {email, password};
 
         const requestOptions: RequestInit = {
             method: 'POST',
@@ -37,20 +37,20 @@ const Login = () => {
 
         try {
             const response = await fetch(
-                '${process.env.BACKEND_URL}/login',
+                'https://cinebase.erkindilekci.me/login',
                 requestOptions
             );
             const data: FetchDataType = await response.json();
 
             if ('error_message' in data) {
-                toast({ title: 'Error', description: data.error_message });
+                toast({title: 'Error', description: data.error_message});
             } else if ('token' in data) {
                 setJwtToken(data.token);
                 localStorage.setItem('token', data.token);
                 navigate('/');
             }
         } catch (error) {
-            toast({ title: 'Error', description: String(error) });
+            toast({title: 'Error', description: String(error)});
         } finally {
             setIsLoading(false);
         }

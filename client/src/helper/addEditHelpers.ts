@@ -1,4 +1,4 @@
-import { Genre } from "@/components/pages/Genres.tsx";
+import {Genre} from "@/components/pages/Genres.tsx";
 
 export interface FormDataType {
     id?: number;
@@ -12,7 +12,7 @@ export interface FormDataType {
 }
 
 export const fetchGenres = async (): Promise<Genre[]> => {
-    const response = await fetch('${process.env.BACKEND_URL}/genres');
+    const response = await fetch('https://cinebase.erkindilekci.me/genres');
     if (!response.ok) {
         throw new Error('Failed to fetch genres');
     }

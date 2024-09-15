@@ -1,11 +1,11 @@
-import { Badge } from './ui/badge';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, CalendarIcon, ClockIcon } from 'lucide-react';
-import { Movie } from './pages/MovieDetails';
-import { Button } from './ui/button';
-import { useNavigate } from 'react-router-dom';
+import {Badge} from './ui/badge';
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import {ArrowLeft, CalendarIcon, ClockIcon} from 'lucide-react';
+import {Movie} from './pages/MovieDetails';
+import {Button} from './ui/button';
+import {useNavigate} from 'react-router-dom';
 
-const MovieCard = ({ movie }: { movie: Movie }) => {
+const MovieCard = ({movie}: { movie: Movie }) => {
     const navigate = useNavigate();
 
     return (

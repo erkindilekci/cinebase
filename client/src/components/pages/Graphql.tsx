@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
     ColumnFiltersState,
     flexRender,
@@ -10,17 +10,17 @@ import {
     useReactTable,
     VisibilityState
 } from '@tanstack/react-table';
-import { ChevronDownIcon } from 'lucide-react';
+import {ChevronDownIcon} from 'lucide-react';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import ErrorCard from '../ErrorCard';
 import Loading from '../Loading';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Input } from '../ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
-import { Movie } from './MovieDetails';
-import { movieColumns } from "@/components/pages/Movies.tsx";
+import {Button} from '../ui/button';
+import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger} from '../ui/dropdown-menu';
+import {Input} from '../ui/input';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '../ui/table';
+import {Movie} from './MovieDetails';
+import {movieColumns} from "@/components/pages/Movies.tsx";
 
 const MOVIES_QUERY = `
   query {
@@ -43,10 +43,10 @@ const fetchMovies = async (): Promise<Movie[]> => {
     const requestOptions: RequestInit = {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify({ query: MOVIES_QUERY })
+        body: JSON.stringify({query: MOVIES_QUERY})
     };
 
-    const response = await fetch('${process.env.BACKEND_URL}/graphql', requestOptions);
+    const response = await fetch('https://cinebase.erkindilekci.me/graphql', requestOptions);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }

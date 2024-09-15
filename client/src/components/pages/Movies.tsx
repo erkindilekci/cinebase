@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -11,24 +11,24 @@ import {
     useReactTable,
     VisibilityState
 } from '@tanstack/react-table';
-import { ChevronDownIcon } from 'lucide-react';
+import {ChevronDownIcon} from 'lucide-react';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import ErrorCard from '../ErrorCard';
 import Loading from '../Loading';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Input } from '../ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
-import { Movie } from './MovieDetails';
+import {Button} from '../ui/button';
+import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger} from '../ui/dropdown-menu';
+import {Input} from '../ui/input';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '../ui/table';
+import {Movie} from './MovieDetails';
 
 const fetchMovies = async (): Promise<Movie[]> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const requestOptions: RequestInit = { method: 'GET', headers: headers };
+    const requestOptions: RequestInit = {method: 'GET', headers: headers};
 
-    const response = await fetch('${process.env.BACKEND_URL}/movies', requestOptions);
+    const response = await fetch('https://cinebase.erkindilekci.me/movies', requestOptions);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
@@ -39,12 +39,12 @@ export const movieColumns: ColumnDef<Movie>[] = [
     {
         accessorKey: 'title',
         header: 'Title',
-        cell: ({ row }) => <div>{row.getValue('title')}</div>
+        cell: ({row}) => <div>{row.getValue('title')}</div>
     },
     {
         accessorKey: 'release_date',
         header: 'Release Date',
-        cell: ({ row }) => {
+        cell: ({row}) => {
             const date = new Date(row.getValue('release_date'));
             const formattedDate = new Intl.DateTimeFormat(navigator.language, {
                 year: 'numeric',
@@ -57,17 +57,17 @@ export const movieColumns: ColumnDef<Movie>[] = [
     {
         accessorKey: 'runtime',
         header: 'Runtime',
-        cell: ({ row }) => <div>{row.getValue('runtime')} min</div>
+        cell: ({row}) => <div>{row.getValue('runtime')} min</div>
     },
     {
         accessorKey: 'mpaa_rating',
         header: 'Mpaa Rating',
-        cell: ({ row }) => <div>{row.getValue('mpaa_rating')}</div>
+        cell: ({row}) => <div>{row.getValue('mpaa_rating')}</div>
     },
     {
         accessorKey: 'description',
         header: 'Description',
-        cell: ({ row }) => <div>{row.getValue('description')}</div>
+        cell: ({row}) => <div>{row.getValue('description')}</div>
     }
 ];
 

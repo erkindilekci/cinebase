@@ -1,11 +1,11 @@
-import { cn } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
+import {cn} from '@/lib/utils';
+import {Loader2} from 'lucide-react';
 
 interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
     size?: 'sm' | 'md' | 'lg';
 }
 
-const Loading = ({ size = 'md', className, ...props }: SpinnerProps) => {
+const Loading = ({size = 'md', className, ...props}: SpinnerProps) => {
     return (
         <div
             className={cn(
