@@ -1,17 +1,51 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import UserAuthForm from '../UserAuthForm';
+import {useToast} from '@/hooks/use-toast';
+
+interface FormDataType {
+    email: string;
+    password: string;
+}
+
 
 const Signup = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const {toast} = useToast();
+    const navigate = useNavigate();
 
-    async function handleSubmit(data: { email: string; password: string }) {
+    async function handleSubmit({email, password}: FormDataType) {
         setIsLoading(true);
 
-        console.log('Email:', data.email);
-        console.log('Password:', data.password);
+        const payload = {email, password};
 
-        setIsLoading(false);
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(payload)
+        };
+
+        try {
+            const response = await fetch(
+                'https://cinebase.erkindilekci.me/signup',
+                requestOptions
+            );
+            if (response.status === 201) {
+                navigate('/login');
+            } else {
+                const data = await response.json();
+                if ('error_message' in data) {
+                    toast({title: 'Error', description: data.error_message});
+                }
+            }
+        } catch (error) {
+            toast({title: 'Error', description: String(error)});
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
