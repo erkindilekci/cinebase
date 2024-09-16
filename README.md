@@ -4,6 +4,7 @@
 This project is a web application built with Golang and React that allows users to register, log in, and view detailed information about movies.
 
 ## Screenshot
+![cinebase](https://github.com/user-attachments/assets/76231b5d-5bd7-49b8-a32b-d42035183112)
 
 ## Technologies
 
